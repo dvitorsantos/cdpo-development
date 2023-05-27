@@ -1,0 +1,199 @@
+version: "3"
+services:
+  postgres:
+    build: postgres/
+    container_name: postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+    restart: unless-stopped
+  mosquitto:
+    image: eclipse-mosquitto:2.0.13
+    container_name: mosquitto
+    volumes:
+        - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    expose:
+      - 1883
+    ports:
+      - 1883:1883
+  cdpo:
+    build: cdpo/
+    container_name: cdpo
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cdpo
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - CDPO_TAGGER_URL=http://tagger:8180
+      - CDPO_FOGCATALOGUER_URL=http://fogcataloguer:8280
+      - CDPO_SCHEDULE_RATE=600000
+      - CDPO_CDPO-COMPOSER_URL=http://cdpo-composer:8010
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  tagger:
+    build: tagger/
+    container_name: tagger
+    expose:
+      - 8080
+    ports:
+      - "8180:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tagger
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - TAGGER_PROVIDER-URL_RESOURCE=https://api.playground.interscity.org/catalog/resources/
+      - TAGGER_PROVIDER-URL_FOG-NODE=http://iotcataloguer:8080/gateway/
+      - TAGGER_PROVIDER-URL_EDGE-NODE=http://iotcataloguer:8080/resource/
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  iotcataloguer:
+    build: iotcataloguer/
+    container_name: iotcataloguer
+    expose:
+      - 8080
+    ports:
+      - "8280:8080"
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/iotcataloguer
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=admin
+        - FOGCATALOGUER_TAGGER_URLl=http://tagger:8080/tagger
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  contextmatcher:
+    build: context-matcher/
+    container_name: contextmatcher
+    expose:
+      - 8080
+    ports:
+      - "8380:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/contextmatcher
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - tagger
+    links:
+      - postgres
+  fogworker:
+    build: fogworker/
+    container_name: fogworker
+    expose:
+      - 8080
+    ports:
+      - "8580:8080"
+    environment:
+      - FOGWORKER_UUID=FOGWORKER
+      - FOGWORKER_URL=http://fogworker:8080
+      - FOGWORKER_NAME=FOGWORKER
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - CDPO_URL=http://cdpo:8080
+    restart: unless-stopped
+    links:
+      - mosquitto
+      - iotcataloguer
+      - cdpo
+    networks:
+      - cloudnode_default
+      - cdpo-development_default
+  edgeworker1:
+    build: edgeworker/
+    container_name: edgeworker
+    expose:
+      - 8080
+    ports:
+      - "8480:8080"
+    environment:
+      - EDGEWORKER_UUID=1
+      - EDGEWORKER_URL=http://edgeworker1:8080
+      - EDGEWORKER_NAME=1
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+    links:
+      - mosquitto
+      - iotcataloguer
+      - cdpo
+  edgeworker2:
+    build: edgeworker/
+    container_name: edgeworker2
+    expose:
+      - 8080
+    ports:
+      - "8680:8080"
+    environment:
+      - EDGEWORKER_UUID=2
+      - EDGEWORKER_URL=http://edgeworker2:8080
+      - EDGEWORKER_NAME=2
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+      - CONTEXTMATCHER_URL=http://contextmatcher:8080
+    restart: unless-stopped
+    links:
+      - mosquitto
+      - iotcataloguer
+      - cdpo
+  edgeworker3:
+    build: edgeworker/
+    container_name: edgeworker3
+    expose:
+      - 8080
+    ports:
+      - "8780:8080"
+    environment:
+      - EDGEWORKER_UUID=4
+      - EDGEWORKER_URL=http://edgeworker3:8080
+      - EDGEWORKER_NAME=4
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+    links:
+      - mosquitto
+      - iotcataloguer
+      - cdpo
+  edgeworker4:
+    build: edgeworker/
+    container_name: edgeworker4
+    expose:
+      - 8080
+    ports:
+      - "8880:8080"
+    environment:
+      - EDGEWORKER_UUID=5
+      - EDGEWORKER_URL=http://edgeworker4:8080
+      - EDGEWORKER_NAME=5
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+    links:
+      - mosquitto
+      - iotcataloguer
+      - cdpo
+networks:
+    cloudnode_default:
+        external: true
+    cdpo-development_default:
+        external: true

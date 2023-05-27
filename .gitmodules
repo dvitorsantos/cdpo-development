@@ -1,0 +1,21 @@
+[submodule "cdpo"]
+	path = cdpo
+	url = https://github.com/dvitorsantos/cdpo.git
+[submodule "context-matcher"]
+	path = context-matcher
+	url = https://github.com/dvitorsantos/context-matcher.git
+[submodule "fogworker"]
+	path = fogworker
+	url = https://github.com/dvitorsantos/fogworker.git
+[submodule "edgeworker"]
+	path = edgeworker
+	url = https://github.com/dvitorsantos/edgeworker.git
+[submodule "iotcataloguer"]
+	path = iotcataloguer
+	url = http://git.lsdi.ufma.br/cdpo/iotcataloguer.git
+[submodule "tagger"]
+	path = tagger
+	url = http://git.lsdi.ufma.br/cdpo/tagger.git
+[submodule "cloudnode"]
+	path = cloudnode
+	url = https://github.com/dvitorsantos/cloudnode.git
