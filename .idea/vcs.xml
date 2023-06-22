@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cdpo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudnode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudnode/cloudcollector" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudnode/cloudconsumer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudnode/clouddeployer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudnode/cloudworker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/context-matcher" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/edgeworker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/fogworker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/iotcataloguer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tagger" vcs="Git" />
+  </component>
+</project>

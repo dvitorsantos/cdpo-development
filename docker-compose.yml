@@ -123,9 +123,9 @@ services:
     ports:
       - "8480:8080"
     environment:
-      - EDGEWORKER_UUID=1
+      - EDGEWORKER_UUID=Onibus_monitorado_1
       - EDGEWORKER_URL=http://edgeworker1:8080
-      - EDGEWORKER_NAME=1
+      - EDGEWORKER_NAME=Onibus_monitorado_1
       - IOTCATALOGER_URL=http://iotcataloguer:8080
       - TAGGER_URL=http://tagger/tagger:8080
       - MOSQUITTO_URL=tcp://mosquitto:1883
@@ -142,9 +142,9 @@ services:
     ports:
       - "8680:8080"
     environment:
-      - EDGEWORKER_UUID=2
+      - EDGEWORKER_UUID=Onibus_monitorado_2
       - EDGEWORKER_URL=http://edgeworker2:8080
-      - EDGEWORKER_NAME=2
+      - EDGEWORKER_NAME=Onibus_monitorado_2
       - IOTCATALOGER_URL=http://iotcataloguer:8080
       - TAGGER_URL=http://tagger/tagger:8080
       - MOSQUITTO_URL=tcp://mosquitto:1883
@@ -162,9 +162,9 @@ services:
     ports:
       - "8780:8080"
     environment:
-      - EDGEWORKER_UUID=4
+      - EDGEWORKER_UUID=Onibus_monitorado_3
       - EDGEWORKER_URL=http://edgeworker3:8080
-      - EDGEWORKER_NAME=4
+      - EDGEWORKER_NAME=Onibus_monitorado_3
       - IOTCATALOGER_URL=http://iotcataloguer:8080
       - TAGGER_URL=http://tagger/tagger:8080
       - MOSQUITTO_URL=tcp://mosquitto:1883
@@ -181,9 +181,9 @@ services:
     ports:
       - "8880:8080"
     environment:
-      - EDGEWORKER_UUID=5
+      - EDGEWORKER_UUID=Onibus_monitorado_4
       - EDGEWORKER_URL=http://edgeworker4:8080
-      - EDGEWORKER_NAME=5
+      - EDGEWORKER_NAME=Onibus_monitorado_4
       - IOTCATALOGER_URL=http://iotcataloguer:8080
       - TAGGER_URL=http://tagger/tagger:8080
       - MOSQUITTO_URL=tcp://mosquitto:1883

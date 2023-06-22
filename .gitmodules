@@ -19,3 +19,6 @@
 [submodule "cloudnode"]
 	path = cloudnode
 	url = https://github.com/dvitorsantos/cloudnode.git
+[submodule "fognode"]
+	path = fognode
+	url = https://github.com/dvitorsantos/fognode
