@@ -22,3 +22,6 @@
 [submodule "fognode"]
 	path = fognode
 	url = https://github.com/dvitorsantos/fognode
+[submodule "edgenode"]
+	path = edgenode
+	url = https://github.com/dvitorsantos/edgenode.git
