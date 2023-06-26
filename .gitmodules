@@ -7,9 +7,6 @@
 [submodule "fogworker"]
 	path = fogworker
 	url = https://github.com/dvitorsantos/fogworker.git
-[submodule "edgeworker"]
-	path = edgeworker
-	url = https://github.com/dvitorsantos/edgeworker.git
 [submodule "iotcataloguer"]
 	path = iotcataloguer
 	url = http://git.lsdi.ufma.br/cdpo/iotcataloguer.git
