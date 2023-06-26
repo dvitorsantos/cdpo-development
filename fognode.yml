@@ -1,0 +1,65 @@
+services:
+  fogcollector:
+    build: ./fognode/fogcollector/
+    container_name: fogcollector
+    expose:
+      - 8080
+    ports:
+      - "8082:8080"
+    environment:
+      - MOSQUITTO_URL=tcp://localhost:1883
+      - CLIENT_UUID=fognode
+      - WORKER_URL=http://fogworker:8080
+      - DEPLOYER_URL=http://fogdeployer:8080
+      - CLOUDCOLLECTOR_URL=http://cloudcollector:8080
+    networks:
+      - cdpo-development_default
+  fogdeployer:
+    build: ./fognode/fogdeployer/
+    container_name: fogdeployer
+    expose:
+      - 8080
+    ports:
+      - "8182:8080"
+    environment:
+      - DEPLOYER_UUID=fognode
+      - DEPLOYER_NAME=fognode
+      - DEPLOYER_URL=http://fogdeployer:8080
+      - WORKER_URL=http://fogworker:8080
+      - COLLECTOR_URL=http://fogcollector:8080
+      - CONSUMER_URL=http://fogconsumer:8080
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+    networks:
+      - cdpo-development_default
+  fogworker:
+    build: ./fognode/fogworker/
+    container_name: fogworker
+    expose:
+      - 8080
+    ports:
+      - "8282:8080"
+    environment:
+      - CONSUMER_URL=http://fogconsumer:8080
+    networks:
+      - cdpo-development_default
+  fogconsumer:
+    build: ./fognode/fogconsumer/
+    container_name: fogconsumer
+    expose:
+      - 8080
+    ports:
+      - "8382:8080"
+    networks:
+      - cdpo-development_default
+  fogbroker:
+    image: eclipse-mosquitto:2.0.13
+    container_name: fogbroker
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    expose:
+      - 1883
+    ports:
+      - 1884:1883
+networks:
+  cdpo-development_default:
+    external: true

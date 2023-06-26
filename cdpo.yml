@@ -1,0 +1,97 @@
+services:
+  postgres:
+    build: postgres/
+    container_name: postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+    restart: unless-stopped
+  mosquitto:
+    image: eclipse-mosquitto:2.0.13
+    container_name: mosquitto
+    volumes:
+        - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    expose:
+      - 1883
+    ports:
+      - 1883:1883
+  cdpo:
+    build: cdpo/
+    container_name: cdpo
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cdpo
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - CDPO_TAGGER_URL=http://tagger:8180
+      - CDPO_FOGCATALOGUER_URL=http://fogcataloguer:8280
+      - CDPO_SCHEDULE_RATE=600000
+      - CDPO_CDPO-COMPOSER_URL=http://cdpo-composer:8010
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  tagger:
+    build: tagger/
+    container_name: tagger
+    expose:
+      - 8080
+    ports:
+      - "8180:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tagger
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - TAGGER_PROVIDER-URL_RESOURCE=https://api.playground.interscity.org/catalog/resources/
+      - TAGGER_PROVIDER-URL_FOG-NODE=http://iotcataloguer:8080/gateway/
+      - TAGGER_PROVIDER-URL_EDGE-NODE=http://iotcataloguer:8080/resource/
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  iotcataloguer:
+    build: iotcataloguer/
+    container_name: iotcataloguer
+    expose:
+      - 8080
+    ports:
+      - "8280:8080"
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/iotcataloguer
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=admin
+        - FOGCATALOGUER_TAGGER_URLl=http://tagger:8080/tagger
+    restart: unless-stopped
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  contextmatcher:
+    build: context-matcher/
+    container_name: contextmatcher
+    expose:
+      - 8080
+    ports:
+      - "8380:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/contextmatcher
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - tagger
+    links:
+      - postgres
+networks:
+    cdpo-development_default:
+        external: true

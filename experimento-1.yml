@@ -1,0 +1,65 @@
+services:
+  edgeworker1:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker
+    expose:
+      - 8080
+    ports:
+      - "8480:8080"
+    environment:
+      - EDGEWORKER_UUID=Onibus_monitorado_1
+      - EDGEWORKER_URL=http://edgeworker1:8080
+      - EDGEWORKER_NAME=Onibus_monitorado_1
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  edgeworker2:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker2
+    expose:
+      - 8080
+    ports:
+      - "8680:8080"
+    environment:
+      - EDGEWORKER_UUID=Onibus_monitorado_2
+      - EDGEWORKER_URL=http://edgeworker2:8080
+      - EDGEWORKER_NAME=Onibus_monitorado_2
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+      - CONTEXTMATCHER_URL=http://contextmatcher:8080
+    restart: unless-stopped
+  edgeworker3:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker3
+    expose:
+      - 8080
+    ports:
+      - "8780:8080"
+    environment:
+      - EDGEWORKER_UUID=Onibus_monitorado_3
+      - EDGEWORKER_URL=http://edgeworker3:8080
+      - EDGEWORKER_NAME=Onibus_monitorado_3
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  edgeworker4:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker4
+    expose:
+      - 8080
+    ports:
+      - "8880:8080"
+    environment:
+      - EDGEWORKER_UUID=Onibus_monitorado_4
+      - EDGEWORKER_URL=http://edgeworker4:8080
+      - EDGEWORKER_NAME=Onibus_monitorado_4
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+networks:
+  cdpo-development_default:
+    external: true

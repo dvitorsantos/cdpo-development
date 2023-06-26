@@ -1,0 +1,16 @@
+services:
+  car_0:
+      build: ./edgenode/edgeworker/
+      container_name: edgeworker
+      expose:
+        - 8080
+      ports:
+        - "8480:8080"
+      environment:
+        - EDGEWORKER_UUID=car_0
+        - EDGEWORKER_URL=http://car_0:8080
+        - EDGEWORKER_NAME=car_0
+        - IOTCATALOGER_URL=http://iotcataloguer:8080
+        - TAGGER_URL=http://tagger/tagger:8080
+        - MOSQUITTO_URL=tcp://mosquitto:1883
+      restart: unless-stopped
