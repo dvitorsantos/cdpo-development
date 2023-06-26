@@ -4,9 +4,6 @@
 [submodule "context-matcher"]
 	path = context-matcher
 	url = https://github.com/dvitorsantos/context-matcher.git
-[submodule "fogworker"]
-	path = fogworker
-	url = https://github.com/dvitorsantos/fogworker.git
 [submodule "iotcataloguer"]
 	path = iotcataloguer
 	url = http://git.lsdi.ufma.br/cdpo/iotcataloguer.git
