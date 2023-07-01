@@ -51,15 +51,6 @@ services:
       - "8382:8080"
     networks:
       - cdpo-development_default
-  fogbroker:
-    image: eclipse-mosquitto:2.0.13
-    container_name: fogbroker
-    volumes:
-      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-    expose:
-      - 1883
-    ports:
-      - 1884:1883
 networks:
   cdpo-development_default:
     external: true

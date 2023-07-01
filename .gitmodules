@@ -19,3 +19,6 @@
 [submodule "edgenode"]
 	path = edgenode
 	url = https://github.com/dvitorsantos/edgenode.git
+[submodule "sumo_simulation"]
+	path = sumo_simulation
+	url = http://git.lsdi.ufma.br/andre.barreto/sumo_simulation.git

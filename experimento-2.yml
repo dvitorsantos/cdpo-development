@@ -1,16 +1,150 @@
 services:
   car_0:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_0
+    expose:
+      - 8080
+    ports:
+      - "8480:8080"
+    environment:
+      - EDGEWORKER_UUID=car_0
+      - EDGEWORKER_URL=http://car_0:8080
+      - EDGEWORKER_NAME=car_0
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_1:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_1
+    expose:
+      - 8080
+    ports:
+      - "8481:8080"
+    environment:
+      - EDGEWORKER_UUID=car_1
+      - EDGEWORKER_URL=http://car_1:8080
+      - EDGEWORKER_NAME=car_1
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_2:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_2
+    expose:
+      - 8080
+    ports:
+      - "8482:8080"
+    environment:
+      - EDGEWORKER_UUID=car_2
+      - EDGEWORKER_URL=http://car_2:8080
+      - EDGEWORKER_NAME=car_2
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_3:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_3
+    expose:
+      - 8080
+    ports:
+      - "8483:8080"
+    environment:
+      - EDGEWORKER_UUID=car_3
+      - EDGEWORKER_URL=http://car_3:8080
+      - EDGEWORKER_NAME=car_3
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_4:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_4
+    expose:
+      - 8080
+    ports:
+      - "8484:8080"
+    environment:
+      - EDGEWORKER_UUID=car_4
+      - EDGEWORKER_URL=http://car_4:8080
+      - EDGEWORKER_NAME=car_4
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+  car_5:
       build: ./edgenode/edgeworker/
-      container_name: edgeworker
+      container_name: edgeworker_car_5
       expose:
         - 8080
       ports:
-        - "8480:8080"
+        - "8485:8080"
       environment:
-        - EDGEWORKER_UUID=car_0
-        - EDGEWORKER_URL=http://car_0:8080
-        - EDGEWORKER_NAME=car_0
+        - EDGEWORKER_UUID=car_5
+        - EDGEWORKER_URL=http://car_5:8080
+        - EDGEWORKER_NAME=car_5
         - IOTCATALOGER_URL=http://iotcataloguer:8080
         - TAGGER_URL=http://tagger/tagger:8080
         - MOSQUITTO_URL=tcp://mosquitto:1883
       restart: unless-stopped
+  car_6:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_6
+    expose:
+      - 8080
+    ports:
+      - "8486:8080"
+    environment:
+      - EDGEWORKER_UUID=car_6
+      - EDGEWORKER_URL=http://car_6:8080
+      - EDGEWORKER_NAME=car_6
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_7:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_7
+    expose:
+      - 8080
+    ports:
+      - "8487:8080"
+    environment:
+      - EDGEWORKER_UUID=car_7
+      - EDGEWORKER_URL=http://car_7:8080
+      - EDGEWORKER_NAME=car_7
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_8:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_8
+    expose:
+      - 8080
+    ports:
+      - "8488:8080"
+    environment:
+      - EDGEWORKER_UUID=car_8
+      - EDGEWORKER_URL=http://car_8:8080
+      - EDGEWORKER_NAME=car_8
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
+  car_9:
+    build: ./edgenode/edgeworker/
+    container_name: edgeworker_car_9
+    expose:
+      - 8080
+    ports:
+      - "8489:8080"
+    environment:
+      - EDGEWORKER_UUID=car_9
+      - EDGEWORKER_URL=http://car_9:8080
+      - EDGEWORKER_NAME=car_9
+      - IOTCATALOGER_URL=http://iotcataloguer:8080
+      - TAGGER_URL=http://tagger/tagger:8080
+      - MOSQUITTO_URL=tcp://mosquitto:1883
+    restart: unless-stopped
